@@ -1,12 +1,14 @@
-import React from 'react'
+import React from 'react';
+import { AppBar } from '../ui/AppBar';
+import { AddNewFab } from '../ui/AddNewFab';
+import { OperationModal } from '../forms/OperationModal';
 
 export const WalletScreen = () => {
-    return (
-        <div>
-            <h1>WalletScreen</h1>
-            <hr/>
-
-            navbar!!
-        </div>
-    )
-}
+	return (
+		<div>
+			<AppBar />
+			<AddNewFab />
+			<OperationModal />
+		</div>
+	);
+};

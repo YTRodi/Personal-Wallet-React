@@ -16,81 +16,65 @@ import { Copyright } from './Copyright';
 
 import { useStylesAuth } from '../../styles/auth';
 
-
 export const LoginScreen = () => {
+	const classes = useStylesAuth();
 
-    const classes = useStylesAuth();
+	return (
+		<Container component='main' maxWidth='xs' className={classes.container}>
+			<CssBaseline />
 
-    return (
-        <Container component='main' maxWidth='xs' className={ classes.container }>
+			<div className={classes.paper}>
+				<Avatar className={classes.avatar}>
+					<LockOutlinedIcon />
+				</Avatar>
 
-            <CssBaseline />
+				<Typography component='h1' variant='h5'>
+					Sign in
+				</Typography>
 
-            <div className={ classes.paper }>
+				<form className={classes.form} noValidate>
+					<TextField
+						variant='outlined'
+						margin='normal'
+						required
+						fullWidth
+						name=''
+						label='Email Address'
+						autoFocus
+					/>
 
-                <Avatar className={ classes.avatar }>
-                    <LockOutlinedIcon />
-                </Avatar>
+					<TextField
+						variant='outlined'
+						margin='normal'
+						required
+						fullWidth
+						name=''
+						label='Password'
+						type='password'
+					/>
 
-                <Typography component='h1' variant='h5'>
-                    Sign in
-                </Typography>
+					{/* MEH, no se si voy a usarlo jeje */}
+					<FormControlLabel
+						control={<Checkbox value='remember' color='primary' />}
+						label='Remember me'
+					/>
+					{/* MEH, no se si voy a usarlo jeje */}
 
-                <form className={ classes.form } noValidate>
+					<Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
+						Sign In
+					</Button>
 
-                    <TextField
-                        variant='outlined'
-                        margin='normal'
-                        required
-                        fullWidth
-                        name=''
-                        label='Email Address'
-                        autoFocus
-                    />
+					<Grid container>
+						<Grid item>
+							<Link to='/auth/register'>{`Don't have an account? Sign Up!`}</Link>
+						</Grid>
+					</Grid>
+				</form>
+			</div>
 
-                    <TextField
-                        variant='outlined'
-                        margin='normal'
-                        required
-                        fullWidth
-                        name=''
-                        label='Password'
-                        type='password'
-                    />
-
-                    {/* MEH, no se si voy a usarlo jeje */}
-                    <FormControlLabel 
-                        control={ <Checkbox value='remember' color='primary'/> }
-                        label='Remember me'
-                    />
-                    {/* MEH, no se si voy a usarlo jeje */}
-
-                    <Button
-                        type='submit'
-                        fullWidth
-                        variant='contained'
-                        color='primary'
-                        className={ classes.submit }
-                    >
-                        Sign In
-                    </Button>
-
-                    <Grid container>
-                        <Grid item>
-                            <Link to='/auth/register'>
-                                { `Don't have an account? Sign Up!` }
-                            </Link>
-                        </Grid>
-                    </Grid>
-
-                </form>
-
-            </div>
-
-            <Box mt={ 8 }>
-                <Copyright />
-            </Box>
-            
-        </Container>
-    );
+			<Box mt={8}>
+				<Copyright />
+			</Box>
+		</Container>
+	);
 };
