@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import { fetchWithoutToken } from '../helpers/fetch';
+import { fetchWithoutToken, fetchWithToken } from '../helpers/fetch';
 import { types } from '../types/types';
 
 export const startLogin = (email, password) => {
@@ -20,6 +20,48 @@ export const startLogin = (email, password) => {
 		dispatch(login(userPayload));
 	};
 };
+
+export const startRegister = (name, email, password) => {
+	return async (dispatch) => {
+		const res = await fetchWithoutToken('auth/new', { name, email, password }, 'POST');
+		const body = await res.json();
+
+		if (!body.ok) return Swal.fire('Error', body.msg, 'error');
+
+		localStorage.setItem('x-token', body.token);
+
+		const userPayload = {
+			uid: body.uid,
+			name: body.name,
+		};
+
+		dispatch(login(userPayload));
+	};
+};
+
+export const startChecking = () => {
+	return async (dispatch) => {
+		const res = await fetchWithToken('auth/renew');
+		const body = await res.json();
+
+		if (body.ok) {
+			localStorage.setItem('x-token', body.token);
+
+			const userPayload = {
+				uid: body.uid.toString(),
+				name: body.name,
+			};
+
+			dispatch(login(userPayload));
+		} else {
+			// Swal.fire('Error', body.msg, 'error');
+
+			dispatch(checkingFinish());
+		}
+	};
+};
+
+const checkingFinish = () => ({ type: types.authCheckingFinish });
 
 const login = (user) => ({
 	type: types.authLogin,
