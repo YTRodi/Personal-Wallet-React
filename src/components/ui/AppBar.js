@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { startLogout } from '../../actions/auth';
 
 import { useStylesAppBar } from '../../styles/ui';
 import MaterialAppBar from '@material-ui/core/AppBar';
@@ -12,6 +14,13 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export const AppBar = () => {
 	const classes = useStylesAppBar();
+	const { name } = useSelector((state) => state.auth);
+
+	const dispatch = useDispatch();
+
+	const handleLogout = () => {
+		dispatch(startLogout());
+	};
 
 	return (
 		<div className={classes.root}>
@@ -20,10 +29,17 @@ export const AppBar = () => {
 					<IconButton edge='start' className={classes.menuButton} color='inherit' aria-label='menu'>
 						<PersonIcon />
 					</IconButton>
+
 					<Typography variant='h6' className={classes.title}>
-						Nombre del usuario
+						{name}
 					</Typography>
-					<Button color='secondary' variant='contained' startIcon={<ExitToAppIcon />}>
+
+					<Button
+						color='secondary'
+						variant='contained'
+						startIcon={<ExitToAppIcon />}
+						onClick={handleLogout}
+					>
 						Logout
 					</Button>
 				</Toolbar>
