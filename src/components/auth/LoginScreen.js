@@ -1,5 +1,7 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useForm } from '../../hooks/useForm';
 
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -16,8 +18,27 @@ import { Copyright } from './Copyright';
 
 import { useStylesAuth } from '../../styles/auth';
 
+// Actions
+import { startLogin } from '../../actions/auth';
+
+//
+//
+//
 export const LoginScreen = () => {
 	const classes = useStylesAuth();
+
+	const dispatch = useDispatch();
+
+	const [formLoginValues, handleLoginInputChange] = useForm({
+		email: 'yago@gmail.com',
+		password: '123456',
+	});
+	const { email, password } = formLoginValues;
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		dispatch(startLogin(email, password));
+	};
 
 	return (
 		<Container component='main' maxWidth='xs' className={classes.container}>
@@ -32,15 +53,17 @@ export const LoginScreen = () => {
 					Sign in
 				</Typography>
 
-				<form className={classes.form} noValidate>
+				<form className={classes.form} noValidate onSubmit={handleSubmit}>
 					<TextField
 						variant='outlined'
 						margin='normal'
 						required
 						fullWidth
-						name=''
-						label='Email Address'
 						autoFocus
+						label='Email Address'
+						name='email'
+						value={email}
+						onChange={handleLoginInputChange}
 					/>
 
 					<TextField
@@ -48,9 +71,11 @@ export const LoginScreen = () => {
 						margin='normal'
 						required
 						fullWidth
-						name=''
-						label='Password'
 						type='password'
+						label='Password'
+						name='password'
+						value={password}
+						onChange={handleLoginInputChange}
 					/>
 
 					{/* MEH, no se si voy a usarlo jeje */}
