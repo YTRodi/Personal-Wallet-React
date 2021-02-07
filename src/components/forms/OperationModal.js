@@ -46,9 +46,6 @@ export const OperationModal = () => {
 
 		// Add
 		dispatch(operationStartAddNew(formOperationvalues));
-		// console.log(formOperationvalues);
-		// console.log(typeof parseInt(amount));
-		// console.log('pegarle a la api y agregar una nueva operation');
 	};
 
 	return (
