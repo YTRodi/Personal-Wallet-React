@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { uiCloseDialog } from '../../actions/ui';
+import { useForm } from '../../hooks/useForm';
 
 import { useStylesDialog } from '../../styles/ui';
 import Button from '@material-ui/core/Button';
@@ -18,6 +19,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import MergeTypeIcon from '@material-ui/icons/MergeType';
+import { operationStartAddNew } from '../../actions/operations';
 
 export const OperationModal = () => {
 	const classes = useStylesDialog();
@@ -29,15 +31,24 @@ export const OperationModal = () => {
 		dispatch(uiCloseDialog());
 	};
 
-	const handleAdd = () => {
-		console.log('pegarle a la api y agregar una nueva operation');
-	};
+	const [formOperationvalues, handleOperationInputChange] = useForm({
+		concept: 'Carniceria',
+		amount: 1000,
+		type: 'egreso',
+	});
 
-	// Select de los types
-	const [type, setType] = useState('');
+	const { concept, amount, type } = formOperationvalues;
 
-	const handleChange = (event) => {
-		setType(event.target.value);
+	const handleAdd = (e) => {
+		e.preventDefault();
+
+		// Validate fields
+
+		// Add
+		dispatch(operationStartAddNew(formOperationvalues));
+		// console.log(formOperationvalues);
+		// console.log(typeof parseInt(amount));
+		// console.log('pegarle a la api y agregar una nueva operation');
 	};
 
 	return (
@@ -51,7 +62,15 @@ export const OperationModal = () => {
 							<ListAltIcon />
 						</Grid>
 						<Grid item>
-							<TextField fullWidth name='' label='Concept' autoFocus required />
+							<TextField
+								fullWidth
+								label='Concept'
+								autoFocus
+								required
+								name='concept'
+								value={concept}
+								onChange={handleOperationInputChange}
+							/>
 						</Grid>
 					</Grid>
 
@@ -60,7 +79,15 @@ export const OperationModal = () => {
 							<AttachMoneyIcon />
 						</Grid>
 						<Grid item>
-							<TextField fullWidth name='' label='Amount' required />
+							<TextField
+								type='number'
+								fullWidth
+								label='Amount'
+								required
+								name='amount'
+								value={amount}
+								onChange={handleOperationInputChange}
+							/>
 						</Grid>
 					</Grid>
 
@@ -71,7 +98,7 @@ export const OperationModal = () => {
 						<Grid item>
 							<FormControl className={classes.formControl}>
 								<InputLabel>Type</InputLabel>
-								<Select name='' value={type} onChange={handleChange} required>
+								<Select required name='type' value={type} onChange={handleOperationInputChange}>
 									<MenuItem value='ingreso'>Ingreso</MenuItem>
 									<MenuItem value='egreso'>Egreso</MenuItem>
 								</Select>
@@ -84,7 +111,7 @@ export const OperationModal = () => {
 					<Button onClick={handleCloseDialog} color='secondary'>
 						Cancel
 					</Button>
-					<Button onClick={handleAdd} color='primary'>
+					<Button color='primary' type='submit' onClick={handleAdd}>
 						Add
 					</Button>
 				</DialogActions>
