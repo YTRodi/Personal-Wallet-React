@@ -1,5 +1,6 @@
 import Swal from 'sweetalert2';
 import { fetchWithToken } from '../helpers/fetch';
+import { prepareOperations } from '../helpers/prepareOperations';
 import { types } from '../types/types';
 import { uiCloseDialog } from './ui';
 
@@ -54,7 +55,7 @@ export const eventStartLoading = () => {
 			if (!body.ok) {
 				Swal.fire('Error Loading', body.msg, 'warning');
 			} else {
-				const { operations } = body;
+				const operations = prepareOperations(body.operations);
 				dispatch(operationLoaded(operations));
 			}
 		} catch (error) {
