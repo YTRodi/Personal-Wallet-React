@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core';
+import { red, green } from '@material-ui/core/colors';
 
 export const useStylesAppBar = makeStyles((theme) => ({
 	root: {
@@ -29,5 +30,21 @@ export const useStylesAddFab = makeStyles((theme) => ({
 export const useStylesDialog = makeStyles((theme) => ({
 	formControl: {
 		minWidth: 182,
+	},
+}));
+
+export const useStylesOperationCard = makeStyles((theme) => ({
+	root: {
+		maxWidth: 300,
+		margin: '10px',
+	},
+	avatarEgreso: {
+		backgroundColor: red[500],
+	},
+	avatarIngreso: {
+		backgroundColor: green[500],
+	},
+	submit: {
+		margin: theme.spacing(0, 1, 1),
 	},
 }));
