@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import moment from 'moment';
 import { useStylesOperationCard } from '../../styles/ui';
@@ -17,15 +17,34 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'; // TYPE: EGRESO
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'; // TYPE: INGRESO
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { operationStartDelete } from '../../actions/operations';
+
+// Actions
+import { operationSetActive, operationStartDelete } from '../../actions/operations';
+import { uiOpenDialog } from '../../actions/ui';
+import Swal from 'sweetalert2';
 
 export const OperationCard = ({ id, amount, creation, concept, type }) => {
 	const classes = useStylesOperationCard();
 
 	const dispatch = useDispatch();
 
+	const handleOpenDialogUpdate = () => {
+		dispatch(operationSetActive({ id, amount, concept, type }));
+		dispatch(uiOpenDialog());
+	};
+
 	const handleOperationDelete = (id) => {
-		dispatch(operationStartDelete(id));
+		Swal.fire({
+			title: 'Are you sure?',
+			text: `You won't be able to revert this!`,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!',
+		}).then((results) => {
+			dispatch(operationStartDelete(id));
+		});
 	};
 
 	return (
@@ -59,6 +78,7 @@ export const OperationCard = ({ id, amount, creation, concept, type }) => {
 					color='primary'
 					startIcon={<EditIcon />}
 					className={classes.submit}
+					onClick={handleOpenDialogUpdate}
 				>
 					Edit
 				</Button>

@@ -16,7 +16,6 @@ export const Panel = () => {
 		>
 			<div
 				style={{
-					// border: '1px solid black',
 					paddingTop: '20px',
 					display: 'flex',
 					justifyContent: 'flex-start',
@@ -27,7 +26,6 @@ export const Panel = () => {
 
 			<div
 				style={{
-					// border: '1px solid black',
 					display: 'flex',
 					flexWrap: 'wrap',
 					justifyContent: 'space-evenly',

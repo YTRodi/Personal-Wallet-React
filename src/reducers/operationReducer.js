@@ -1,9 +1,8 @@
-// import { types } from '../types/types';
-
 import { types } from '../types/types';
 
 const initialState = {
 	data: [], // operations
+	activeOperation: null,
 	// data: [
 	// 	{
 	// 		id: 35,
@@ -21,6 +20,18 @@ const initialState = {
 
 export const operationReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case types.operationSetActive:
+			return {
+				...state,
+				activeOperation: action.payload,
+			};
+
+		case types.operationClearActiveOperation:
+			return {
+				...state,
+				activeOperation: null,
+			};
+
 		// Logout (clear store)
 		case types.operationLogout:
 			return {
@@ -46,6 +57,15 @@ export const operationReducer = (state = initialState, action) => {
 			return {
 				...state,
 				data: state.data.filter((operation) => operation.id !== action.payload),
+			};
+
+		// Update
+		case types.operationUpdated:
+			return {
+				...state,
+				data: state.data.map((operation) =>
+					operation.id === action.payload.id ? action.payload : operation
+				),
 			};
 		default:
 			return state;

@@ -4,6 +4,14 @@ import { prepareOperations } from '../helpers/prepareOperations';
 import { types } from '../types/types';
 import { uiCloseDialog } from './ui';
 
+// setActive
+export const operationSetActive = (operation) => ({
+	type: types.operationSetActive,
+	payload: operation,
+});
+
+export const operationClearActiveOperation = () => ({ type: types.operationClearActiveOperation });
+
 // Logout (clear store)
 export const operationLogout = () => ({
 	type: types.operationLogout,
@@ -92,7 +100,7 @@ export const operationStartDelete = (id) => {
 				Swal.fire('Error', body.msg, 'error');
 			} else {
 				dispatch(operationDelete(id));
-				Swal.fire('Success', 'Operation deleted successfully', 'success');
+				Swal.fire('Deleted', 'Operation deleted successfully', 'success');
 			}
 		} catch (error) {
 			console.log(error);
@@ -103,4 +111,30 @@ export const operationStartDelete = (id) => {
 const operationDelete = (idOperation) => ({
 	type: types.operationDeleted,
 	payload: idOperation,
+});
+
+// Update
+export const operationStartUpdate = (operation) => {
+	return async (dispatch) => {
+		try {
+			const res = await fetchWithToken(`operations/${operation.id}`, operation, 'PUT');
+			const body = await res.json();
+
+			if (!body.ok) {
+				Swal.fire('Error', body.msg, 'error');
+			} else {
+				console.log(body);
+				dispatch(uiCloseDialog());
+				dispatch(operationUpdated(operation));
+				Swal.fire('Updated', 'Operation updated successfully', 'success');
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+const operationUpdated = (operation) => ({
+	type: types.operationUpdated,
+	payload: operation,
 });

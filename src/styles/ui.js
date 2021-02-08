@@ -15,7 +15,7 @@ export const useStylesAppBar = makeStyles((theme) => ({
 
 export const useStylesAddFab = makeStyles((theme) => ({
 	fab: {
-		position: 'absolute',
+		position: 'fixed',
 		bottom: theme.spacing(3),
 		right: theme.spacing(3),
 		width: '80px',
