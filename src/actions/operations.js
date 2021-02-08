@@ -75,3 +75,26 @@ const operationLoaded = (operations) => ({
 	type: types.operationLoaded,
 	payload: operations,
 });
+
+// Delete
+export const operationStartDelete = (id) => {
+	return async (dispatch) => {
+		try {
+			const res = await fetchWithToken(`operations/${id}`, {}, 'DELETE');
+			const body = await res.json();
+
+			if (!body.ok) {
+				Swal.fire('Error', body.msg, 'error');
+			} else {
+				dispatch(operationDelete(id));
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+const operationDelete = (idOperation) => ({
+	type: types.operationDeleted,
+	payload: idOperation,
+});

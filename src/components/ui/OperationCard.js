@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import moment from 'moment';
 import { useStylesOperationCard } from '../../styles/ui';
 
@@ -15,9 +17,16 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'; // TYPE: EGRESO
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'; // TYPE: INGRESO
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { operationStartDelete } from '../../actions/operations';
 
 export const OperationCard = ({ id, amount, creation, concept, type }) => {
 	const classes = useStylesOperationCard();
+
+	const dispatch = useDispatch();
+
+	const handleOperationDelete = (id) => {
+		dispatch(operationStartDelete(id));
+	};
 
 	return (
 		<Card key={id} className={classes.root}>
@@ -59,6 +68,7 @@ export const OperationCard = ({ id, amount, creation, concept, type }) => {
 					color='secondary'
 					startIcon={<DeleteIcon />}
 					className={classes.submit}
+					onClick={() => handleOperationDelete(id)}
 				>
 					Delete
 				</Button>

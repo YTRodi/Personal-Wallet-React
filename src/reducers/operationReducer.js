@@ -35,6 +35,12 @@ export const operationReducer = (state = initialState, action) => {
 				data: [...action.payload],
 			};
 
+		// Delete
+		case types.operationDeleted:
+			return {
+				...state,
+				data: state.data.filter((operation) => operation.id !== action.payload),
+			};
 		default:
 			return state;
 	}
