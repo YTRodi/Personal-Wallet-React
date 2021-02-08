@@ -4,6 +4,11 @@ import { prepareOperations } from '../helpers/prepareOperations';
 import { types } from '../types/types';
 import { uiCloseDialog } from './ui';
 
+// Logout (clear store)
+export const operationLogout = () => ({
+	type: types.operationLogout,
+});
+
 // Add
 export const operationStartAddNew = (operation) => {
 	return async (dispatch, getState) => {
@@ -87,6 +92,7 @@ export const operationStartDelete = (id) => {
 				Swal.fire('Error', body.msg, 'error');
 			} else {
 				dispatch(operationDelete(id));
+				Swal.fire('Success', 'Operation deleted successfully', 'success');
 			}
 		} catch (error) {
 			console.log(error);

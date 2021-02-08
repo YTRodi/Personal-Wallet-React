@@ -4,6 +4,7 @@ export const types = {
 	uiCloseDialog: '[ui] Close dialog',
 
 	// Operation
+	operationLogout: '[Operation] Logout',
 	operationLoaded: '[Operation] loaded',
 	operationStartAddNew: '[Operation] Start add new', // Va a inicializar todo el proceso de grabación.
 	operationAddNew: '[Operation] Add new',

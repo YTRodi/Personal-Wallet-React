@@ -1,6 +1,7 @@
 import Swal from 'sweetalert2';
 import { fetchWithoutToken, fetchWithToken } from '../helpers/fetch';
 import { types } from '../types/types';
+import { operationLogout } from './operations';
 
 export const startLogin = (email, password) => {
 	// Al ser una operación asíncrona y gracias al thunk se va a volver a disparar.
@@ -70,6 +71,7 @@ export const startLogout = () => {
 	return (dispatch) => {
 		localStorage.clear();
 		dispatch(logout());
+		dispatch(operationLogout()); // Clear store
 	};
 };
 

@@ -21,6 +21,12 @@ const initialState = {
 
 export const operationReducer = (state = initialState, action) => {
 	switch (action.type) {
+		// Logout (clear store)
+		case types.operationLogout:
+			return {
+				...initialState,
+			};
+
 		// Add
 		case types.operationAddNew:
 			return {
