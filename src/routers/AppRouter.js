@@ -8,6 +8,7 @@ import { AuthRouter } from './AuthRouter';
 
 import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
+import { Loader } from '../components/ui/Loader';
 
 export const AppRouter = () => {
 	const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export const AppRouter = () => {
 	}, [dispatch]);
 
 	if (checking) {
-		return <h5>Cargando... (PONER COMPONENTE DE LOADINGGGG)</h5>;
+		return <Loader isOpen={checking} />;
 	}
 
 	return (

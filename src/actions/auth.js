@@ -58,8 +58,6 @@ export const startChecking = () => {
 
 			dispatch(login(userPayload));
 		} else {
-			// Swal.fire('Error', body.msg, 'error');
-
 			dispatch(checkingFinish());
 		}
 	};

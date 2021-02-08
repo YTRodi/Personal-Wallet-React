@@ -9,7 +9,6 @@ import { Panel } from '../ui/Panel';
 
 export const WalletScreen = () => {
 	const dispatch = useDispatch();
-
 	useEffect(() => {
 		dispatch(operationStartLoading());
 	}, [dispatch]);

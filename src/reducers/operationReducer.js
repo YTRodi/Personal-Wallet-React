@@ -38,18 +38,18 @@ export const operationReducer = (state = initialState, action) => {
 				...initialState,
 			};
 
-		// Add
-		case types.operationAddNew:
-			return {
-				...state,
-				data: [...state.data, action.payload],
-			};
-
 		// List
 		case types.operationLoaded:
 			return {
 				...state,
 				data: [...action.payload],
+			};
+
+		// Add
+		case types.operationAddNew:
+			return {
+				...state,
+				data: [...state.data, action.payload],
 			};
 
 		// Delete
