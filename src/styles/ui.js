@@ -1,6 +1,26 @@
 import { makeStyles } from '@material-ui/core';
 import { red, green } from '@material-ui/core/colors';
 
+export const useStylesPanel = () => ({
+	divContainer: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+	},
+	divBalance: {
+		paddingTop: '20px',
+		display: 'flex',
+		justifyContent: 'flex-start',
+	},
+	divCards: {
+		display: 'flex',
+		flexWrap: 'wrap',
+		justifyContent: 'space-evenly',
+		paddingTop: '50px',
+		maxWidth: '1400px',
+	},
+});
+
 export const useStylesAppBar = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
@@ -16,10 +36,10 @@ export const useStylesAppBar = makeStyles((theme) => ({
 export const useStylesAddFab = makeStyles((theme) => ({
 	fab: {
 		position: 'fixed',
-		bottom: theme.spacing(3),
-		right: theme.spacing(3),
-		width: '80px',
-		height: '80px',
+		bottom: theme.spacing(2),
+		right: theme.spacing(2),
+		width: '70px',
+		height: '70px',
 	},
 	fabIcon: {
 		width: '50px',

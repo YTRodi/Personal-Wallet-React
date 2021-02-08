@@ -9,8 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -21,9 +19,6 @@ import { useStylesAuth } from '../../styles/auth';
 // Actions
 import { startLogin } from '../../actions/auth';
 
-//
-//
-//
 export const LoginScreen = () => {
 	const classes = useStylesAuth();
 
@@ -41,7 +36,11 @@ export const LoginScreen = () => {
 	};
 
 	return (
-		<Container component='main' maxWidth='xs' className={classes.container}>
+		<Container
+			component='main'
+			maxWidth='xs'
+			className={`${classes.container} animate__animated animate__fadeInRight`}
+		>
 			<CssBaseline />
 
 			<div className={classes.paper}>
@@ -77,13 +76,6 @@ export const LoginScreen = () => {
 						value={password}
 						onChange={handleLoginInputChange}
 					/>
-
-					{/* MEH, no se si voy a usarlo jeje */}
-					<FormControlLabel
-						control={<Checkbox value='remember' color='primary' />}
-						label='Remember me'
-					/>
-					{/* MEH, no se si voy a usarlo jeje */}
 
 					<Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
 						Sign In

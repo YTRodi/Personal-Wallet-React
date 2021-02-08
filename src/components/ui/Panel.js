@@ -1,38 +1,20 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useStylesPanel } from '../../styles/ui';
 import { BalanceCard } from './BalanceCard';
 import { OperationCard } from './OperationCard';
 
 export const Panel = () => {
+	const classes = useStylesPanel();
 	const { data } = useSelector((state) => state.operation);
 
 	return (
-		<div
-			style={{
-				display: 'flex',
-				flexDirection: 'column',
-				alignItems: 'center',
-			}}
-		>
-			<div
-				style={{
-					paddingTop: '20px',
-					display: 'flex',
-					justifyContent: 'flex-start',
-				}}
-			>
+		<div style={classes.divContainer}>
+			<div style={classes.divBalance}>
 				<BalanceCard />
 			</div>
 
-			<div
-				style={{
-					display: 'flex',
-					flexWrap: 'wrap',
-					justifyContent: 'space-evenly',
-					paddingTop: '50px',
-					maxWidth: '1400px',
-				}}
-			>
+			<div style={classes.divCards}>
 				{data
 					.map((op, index) => (
 						<OperationCard

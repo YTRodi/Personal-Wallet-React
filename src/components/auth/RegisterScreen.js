@@ -43,7 +43,11 @@ export const RegisterScreen = () => {
 	};
 
 	return (
-		<Container component='main' maxWidth='xs' className={classes.container}>
+		<Container
+			component='main'
+			maxWidth='xs'
+			className={`${classes.container} animate__animated animate__fadeInLeft`}
+		>
 			<CssBaseline />
 
 			<div className={classes.paper}>

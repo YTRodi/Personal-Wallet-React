@@ -10,7 +10,7 @@ export const BalanceCard = () => {
 	const { balance } = useSelector((state) => state.auth);
 
 	return (
-		<Card>
+		<Card className='animate__animated animate__fadeIn'>
 			<CardContent style={{ padding: '30px' }}>
 				<Typography gutterBottom variant='h5'>
 					Dinero disponible

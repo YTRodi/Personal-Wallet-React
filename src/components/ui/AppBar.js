@@ -23,7 +23,7 @@ export const AppBar = () => {
 	};
 
 	return (
-		<div className={classes.root}>
+		<div className={`${classes.root} animate__animated animate__fadeInDown`}>
 			<MaterialAppBar position='static'>
 				<Toolbar>
 					<IconButton edge='start' className={classes.menuButton} color='inherit' aria-label='menu'>

@@ -48,7 +48,7 @@ export const OperationCard = ({ id, amount, creation, concept, type }) => {
 	};
 
 	return (
-		<Card key={id} className={classes.root}>
+		<Card key={id} className={`${classes.root} animate__animated animate__fadeIn`}>
 			<CardHeader
 				avatar={
 					type === 'egreso' ? (
