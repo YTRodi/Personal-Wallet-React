@@ -30,6 +30,8 @@ export const operationStartAddNew = (operation) => {
 				};
 				dispatch(uiCloseDialog());
 				dispatch(operationAddNew(parsedOperation));
+				dispatch(authUpdateBalance(parsedOperation));
+
 				Swal.fire('Success', 'Operation created successfully', 'success');
 			}
 		} catch (error) {
@@ -43,8 +45,13 @@ const operationAddNew = (operation) => ({
 	payload: operation,
 });
 
+const authUpdateBalance = (operation) => ({
+	type: types.authUpdateBalance,
+	payload: operation,
+});
+
 // List
-export const eventStartLoading = () => {
+export const operationStartLoading = () => {
 	return async (dispatch, getState) => {
 		const { uid } = getState().auth;
 

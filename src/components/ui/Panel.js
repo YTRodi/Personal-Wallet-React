@@ -36,8 +36,9 @@ export const Panel = () => {
 				}}
 			>
 				{data
-					.map((op) => (
+					.map((op, index) => (
 						<OperationCard
+							key={index}
 							id={op.id}
 							amount={op.amount}
 							creation={op.creation}
@@ -47,7 +48,10 @@ export const Panel = () => {
 					))
 					.sort((a, b) => {
 						// Ordeno el array, de mayor a menor
-						return b.id - a.id;
+						const { id: idA } = a.props;
+						const { id: idB } = b.props;
+
+						return idB - idA;
 					})
 					.slice(0, 10)}
 			</div>

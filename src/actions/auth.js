@@ -15,6 +15,7 @@ export const startLogin = (email, password) => {
 		const userPayload = {
 			uid: body.uid,
 			name: body.name,
+			balance: body.balance,
 		};
 
 		dispatch(login(userPayload));
@@ -33,6 +34,7 @@ export const startRegister = (name, email, password) => {
 		const userPayload = {
 			uid: body.uid,
 			name: body.name,
+			balance: body.balance,
 		};
 
 		dispatch(login(userPayload));
@@ -50,6 +52,7 @@ export const startChecking = () => {
 			const userPayload = {
 				uid: body.uid.toString(),
 				name: body.name,
+				balance: body.balance,
 			};
 
 			dispatch(login(userPayload));

@@ -26,6 +26,14 @@ export const authReducer = (state = initialState, action) => {
 				checking: false,
 			};
 
+		case types.authUpdateBalance:
+			const { type, amount } = action.payload;
+
+			return {
+				...state,
+				balance: type === 'ingreso' ? (state.balance += amount) : (state.balance -= amount),
+			};
+
 		default:
 			return state;
 	}

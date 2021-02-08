@@ -1,14 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+// import {authUpdateBalanc} from '../../actions/operations';
 
-import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 
 export const BalanceCard = () => {
+	const { balance } = useSelector((state) => state.auth);
+
 	return (
 		<Card>
 			<CardContent style={{ padding: '30px' }}>
@@ -16,7 +16,7 @@ export const BalanceCard = () => {
 					Dinero disponible
 				</Typography>
 				<hr />
-				<Typography variant='h6'>$ 999999</Typography>
+				<Typography variant='h6'>{`$ ${balance}`}</Typography>
 			</CardContent>
 		</Card>
 	);
